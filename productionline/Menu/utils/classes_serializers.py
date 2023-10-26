@@ -1,17 +1,60 @@
+class Bottle:
+
+    def __init__(self, name: str = "bottle", 
+                 begindate: str = "10/10/1999", 
+                 enddate: str = "10/10/1999",
+                 state: bool = True) -> None:
+        
+        self.name: str = name
+        self.begindate: str = begindate
+        self.enddate: str = enddate
+        self.state: bool = state
+    
+    def set_date(self, begin: str, end: str) -> None:
+        self.begindate = begin
+        self.enddate = end
+    
+    def set_state(self, state: bool) -> None:
+        self.state = state
+
 class ProductionLine:
     
-    def  __init__(self, name: str = "Default Plant", creation_date: str = "1/1/1999", bottles_processed: int = 0) -> None:
+    def  __init__(self, name: str = "Default Plant", 
+                  creation_date: str = "1/1/1999", 
+                  bottles_processed: int = 0,
+                  goodb: list[Bottle] = [],
+                  badb: list[Bottle] = []) -> None:
+        
         self.name: str = name
         self.creation_date: str = creation_date
         self.bottles_processed: int = bottles_processed
+        self.goodbottles: list[Bottle] = goodb
+        self.badbottles: list[Bottle] = badb
+
+    def add_bottle(self, bottle: Bottle, good: bool) -> None:
+        if good:
+            self.goodbottles.append(bottle)
+        else:
+            self.badbottles.append(bottle)
+    
+    def add_bottles(self, bottles: list[Bottle], goods: list[bool]) -> None:
+        for i in range(len(bottles)):
+            if goods[i]:
+                self.goodbottles.append(bottles[i])
+            else:
+                self.badbottles.append(bottles[i])
+    def update_bottles_processed(self) -> None:
+        self.bottles_processed = len(self.goodbottles) + len(self.badbottles)
 
 class ProductionPlant:
 
-    def __init__(self, name: str = "Default Line", creation_date: str = "11/09/1999", production_lines: list[ProductionLine] = []) -> None:
+    def __init__(self, name: str = "Default Line", 
+                 creation_date: str = "11/09/1999", 
+                 production_lines: list[ProductionLine] = []) -> None:
 
         self.name: str = name
         self.creation_date: str = creation_date
-        self.production_lines: list[ProductionLine] = production_lines
+        self.production_lines: list[ProductionLine] = []
       
     def add_pline(self, pl: ProductionLine) -> None:
         self.production_lines.append(pl)
