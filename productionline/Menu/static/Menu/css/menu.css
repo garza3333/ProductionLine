@@ -15,3 +15,23 @@
 .datepicker_dimension{
     height: 35px;
 }
+
+.btng{
+    margin-left: 350;
+    margin-right: 10px;
+    width: 100px;
+    height: 40px;
+    color: white;
+    background-color: rgb(50, 225, 19);
+    border: none;
+}
+
+.btnb{
+    margin-left: 350px;
+    margin-right: 10px;
+    width: 100px;
+    height: 40px;
+    color: white;
+    background-color: rgb(235, 20, 53);
+    border: none;
+}

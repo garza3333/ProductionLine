@@ -78,7 +78,7 @@ function searchbottles(){
             table.innerHTML = '';
 
             var rowNum = 1;
-            console.log("ENTERING THE FUNCTION");
+            
             
             for (const product in data) {
                 if (data.hasOwnProperty(product)) {
@@ -90,28 +90,27 @@ function searchbottles(){
                     th.textContent = rowNum;
                     row.appendChild(th);
 
-                    var btn = document.createElement('button');
-                    btn.style.margin = "10px";
-                    btn.style.width = "10px";
-                    btn.style.height = "10px";
-                    btn.style.color = "white";
-                    btn.style.backgroundColor = "red";
-                    btn.innerHTML = "Bad";
+                    var btnb = document.createElement('button');
+                    btnb.innerHTML = "Bad";
+                    btnb.classList.add("btnb");
 
+                    var btng = document.createElement('button');
+                    btng.innerHTML = "Good";
+                    btng.classList.add("btng");
+                 
+                    
                     
                     rowData.forEach(function (value) {
-                        
 
                         var td = document.createElement('td');
-                        console.log("VALUE:" + value);
-                        if(value == "true"){
-                            btn.backgroundColor = "green";
-                            btn.innerHTML = "Good";
-                            td.appendChild(btn);
-                        }else if(value == "false"){
-                            td.appendChild(btn);
+                        
+                        if(value == true){
+                            td.appendChild(btng);
+                        }else if(value == false){
+                            td.appendChild(btnb);
                         }else{
                             td.textContent = value;
+                            td.style.textAlign = "center";
                         }
                         
                         

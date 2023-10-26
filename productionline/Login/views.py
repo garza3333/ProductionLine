@@ -3,6 +3,7 @@ from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 from Menu.utils.json_manager import JsonManager
 from django.http import JsonResponse
+from datetime import datetime
 
 # Global Variables
 
@@ -48,6 +49,12 @@ def get_p_lines_data(request: HttpRequest, plname: str) -> JsonResponse:
     data: dict[str, Any] = {}
 
     print(request.GET)
+
+    beg: Any = request.GET["beg"]
+    end: Any = request.GET["end"]
+    begin_date: datetime = datetime.strptime(beg, "%m-%d-%Y %H:%M")
+    end_date: datetime = datetime.strptime(end, "%m-%d-%Y %H:%M")
+    
     
     
     for p in jm.static_production_plants:
@@ -55,10 +62,14 @@ def get_p_lines_data(request: HttpRequest, plname: str) -> JsonResponse:
             if pl.name == plname:
                 cont = 1
                 for b in pl.goodbottles:
-                    data["product"+str(cont)] = [b.name,b.enddate,b.state]
-                    cont+=1
+                    bottle_date: datetime = datetime.strptime(b.enddate, "%m/%d/%Y %H:%M")
+                    if begin_date <= bottle_date <= end_date:
+                        data["product"+str(cont)] = [b.name,b.enddate,b.state]
+                        cont+=1
                 for b in pl.badbottles:
-                    data["product"+str(cont)] = [b.name,b.enddate,b.state]
-                    cont+=1
+                    bottle_date: datetime = datetime.strptime(b.enddate, "%m/%d/%Y %H:%M")
+                    if begin_date <= bottle_date <= end_date:
+                        data["product"+str(cont)] = [b.name,b.enddate,b.state]
+                        cont+=1
 
     return JsonResponse(data)
