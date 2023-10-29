@@ -65,7 +65,8 @@ function searchbottles(){
         type: 'GET',
         data: {
             beg:begindate,
-            end:enddate
+            end:enddate,
+            pplant: plantname
         },
         dataType: 'json',
         success: function (data) {

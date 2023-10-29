@@ -1,8 +1,8 @@
 class Bottle:
 
     def __init__(self, name: str = "bottle", 
-                 begindate: str = "10/10/1999", 
-                 enddate: str = "10/10/1999",
+                 begindate: str = "10/10/1999 12:00", 
+                 enddate: str = "10/10/1999 12:00",
                  state: bool = True) -> None:
         
         self.name: str = name
@@ -28,14 +28,15 @@ class ProductionLine:
         self.name: str = name
         self.creation_date: str = creation_date
         self.bottles_processed: int = bottles_processed
-        self.goodbottles: list[Bottle] = goodb
-        self.badbottles: list[Bottle] = badb
+        self.goodbottles: list[Bottle] = []
+        self.badbottles: list[Bottle] = []
 
-    def add_bottle(self, bottle: Bottle, good: bool) -> None:
+    def add_bottle(self, n: str, beg: str, e: str, good: bool) -> None:
+        b: Bottle = Bottle(n,beg,e,good)
         if good:
-            self.goodbottles.append(bottle)
+            self.goodbottles.append(b)
         else:
-            self.badbottles.append(bottle)
+            self.badbottles.append(b)
     
     def add_bottles(self, bottles: list[Bottle], goods: list[bool]) -> None:
         for i in range(len(bottles)):

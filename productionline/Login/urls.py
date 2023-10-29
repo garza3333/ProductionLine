@@ -6,4 +6,5 @@ urlpatterns: list[URLPattern] = [
     path('signin/', views.signin, name='signin'),
     path('getlinesnames/<str:plantname>', views.get_p_lines_names, name='getlinesnames'),
     path('getlinesdata/<str:plname>', views.get_p_lines_data, name='getlinesdata'),
+    path('addProduct/', views.add_product, name='addProduct'),
 ]
