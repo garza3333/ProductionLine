@@ -5,7 +5,9 @@ from datetime import datetime
 
 class Sender:
     def __init__(self) -> None:
-        self.url = "http://127.0.0.1:8000/addProduct/"
+        # self.url = "http://127.0.0.1:8000/addProduct/"
+        self.url = "http://3.147.2.87:8000/addProduct/"
+        
     
     def send_product(self, pplant: str, pline: str, name: str, state: str)-> None:
 
@@ -33,9 +35,13 @@ class Sender:
             print(response.text)
 
 s = Sender()
-s.send_product("Refrescos", "Linea Llenadora 1", "Juice Bottle 1", "true")
-s.send_product("Cerveza", "Linea Llenadora 1", "Beer Bottle 1", "false")
-s.send_product("Agua", "Linea Llenadora 1", "Watter Bottle 1", "false")
+bgood = 20
+bbad = 10
+s.send_product("Refrescos", "Linea Llenadora 1", str(bgood), "true")
+s.send_product("Refrescos", "Linea Llenadora 1", str(bbad), "false")
+# s.send_product("Refrescos", "Linea Llenadora 1", "Juice Bottle 2", "true")
+# s.send_product("Cerveza", "Linea Llenadora 1", "Beer Bottle 2", "true")
+# s.send_product("Agua", "Linea Llenadora 1", "Watter Bottle 2", "true")
 
 
 
